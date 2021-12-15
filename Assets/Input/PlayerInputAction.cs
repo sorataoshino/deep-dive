@@ -179,52 +179,6 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
-        },
-        {
-            ""name"": ""UI"",
-            ""id"": ""e076b026-6b73-44c0-a891-eb18edddaa7e"",
-            ""actions"": [
-                {
-                    ""name"": ""Menu"",
-                    ""type"": ""Button"",
-                    ""id"": ""9d0f7ebf-9500-4bbd-a45d-2292a66a094c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Cancel"",
-                    ""type"": ""Button"",
-                    ""id"": ""6388c0a1-62ca-41f2-a222-a80bc9a374f0"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""bdbdcedf-02f6-49da-8f5f-3c69425b9fd6"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""Menu"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""17b12620-80b5-4b25-beaf-2814136d70bf"",
-                    ""path"": ""<Keyboard>/backspace"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""Cancel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
         }
     ],
     ""controlSchemes"": [
@@ -254,10 +208,6 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
-        // UI
-        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_Menu = m_UI.FindAction("Menu", throwIfNotFound: true);
-        m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -376,47 +326,6 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
-
-    // UI
-    private readonly InputActionMap m_UI;
-    private IUIActions m_UIActionsCallbackInterface;
-    private readonly InputAction m_UI_Menu;
-    private readonly InputAction m_UI_Cancel;
-    public struct UIActions
-    {
-        private @PlayerInputAction m_Wrapper;
-        public UIActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Menu => m_Wrapper.m_UI_Menu;
-        public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
-        public InputActionMap Get() { return m_Wrapper.m_UI; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
-        public void SetCallbacks(IUIActions instance)
-        {
-            if (m_Wrapper.m_UIActionsCallbackInterface != null)
-            {
-                @Menu.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMenu;
-                @Menu.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMenu;
-                @Menu.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMenu;
-                @Cancel.started -= m_Wrapper.m_UIActionsCallbackInterface.OnCancel;
-                @Cancel.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnCancel;
-                @Cancel.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnCancel;
-            }
-            m_Wrapper.m_UIActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Menu.started += instance.OnMenu;
-                @Menu.performed += instance.OnMenu;
-                @Menu.canceled += instance.OnMenu;
-                @Cancel.started += instance.OnCancel;
-                @Cancel.performed += instance.OnCancel;
-                @Cancel.canceled += instance.OnCancel;
-            }
-        }
-    }
-    public UIActions @UI => new UIActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -434,10 +343,5 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
-    }
-    public interface IUIActions
-    {
-        void OnMenu(InputAction.CallbackContext context);
-        void OnCancel(InputAction.CallbackContext context);
     }
 }

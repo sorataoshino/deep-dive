@@ -4,13 +4,13 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerController))]
 public class Player : MonoBehaviour
 {
-	//public HUD HUD;
+	public UI UI;
 
 	PlayerController _controller;
 
 	private void Start()
 	{
-		//HUD = HUD.GetComponent<HUD>();
+		UI = UI.GetComponent<UI>();
 		_controller = GetComponent<PlayerController>();
 	}
 

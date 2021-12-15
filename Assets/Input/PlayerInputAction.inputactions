@@ -166,52 +166,6 @@
                     "isPartOfComposite": false
                 }
             ]
-        },
-        {
-            "name": "UI",
-            "id": "e076b026-6b73-44c0-a891-eb18edddaa7e",
-            "actions": [
-                {
-                    "name": "Menu",
-                    "type": "Button",
-                    "id": "9d0f7ebf-9500-4bbd-a45d-2292a66a094c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Cancel",
-                    "type": "Button",
-                    "id": "6388c0a1-62ca-41f2-a222-a80bc9a374f0",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "bdbdcedf-02f6-49da-8f5f-3c69425b9fd6",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard & Mouse",
-                    "action": "Menu",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "17b12620-80b5-4b25-beaf-2814136d70bf",
-                    "path": "<Keyboard>/backspace",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard & Mouse",
-                    "action": "Cancel",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
         }
     ],
     "controlSchemes": [

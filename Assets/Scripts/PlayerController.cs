@@ -1,6 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using Cinemachine;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -9,12 +9,6 @@ public class PlayerController : MonoBehaviour
 	CharacterController _controller;
 	Player _player;
 	Animator _animator;
-
-	[SerializeField] GameObject menu;
-
-	[Header("Cinemachine")]
-	[SerializeField] CinemachineInputProvider _cinemachineInputProvider;
-	InputActionReference _xyAxis;
 
 	[Header("Controller")]
 	[SerializeField] float _moveSpeed = 6f;
@@ -40,7 +34,6 @@ public class PlayerController : MonoBehaviour
 	{
 		_actions = new PlayerInputAction();
 
-		#region Actions: Player
 		_actions.Player.Move.performed += ctx => OnMove(ctx.ReadValue<Vector2>());
 		_actions.Player.Move.canceled += ctx => _move = new Vector3(0.0f, _move.y, 0.0f);
 
@@ -49,17 +42,9 @@ public class PlayerController : MonoBehaviour
 
 		_actions.Player.Jump.performed += ctx => OnJump();
 
-		_actions.Player.Interact.performed += ctx => OnInteraction();
+		_actions.Player.Interact.performed += ctx => _player.OnInteraction();
 
 		_actions.Player.Menu.performed += ctx => OnMenu();
-		#endregion
-
-		#region Actions: UI
-
-		_actions.UI.Menu.performed += ctx => OnMenu();
-
-		_actions.UI.Cancel.performed += ctx => OnCancel();
-		#endregion
 	}
 
 	private void Start()
@@ -67,8 +52,6 @@ public class PlayerController : MonoBehaviour
 		_controller = GetComponent<CharacterController>();
 		_animator = GetComponent<Animator>();
 		_player = GetComponent<Player>();
-		_xyAxis = _cinemachineInputProvider.XYAxis;
-		Cursor.lockState = CursorLockMode.Locked;
 	}
 
 	private void Update()
@@ -103,35 +86,18 @@ public class PlayerController : MonoBehaviour
 		#endregion
 	}
 
-	#region Actions
 	private void OnMenu()
 	{
-		//bool activeState = !_player.HUD.UIPhone.gameObject.activeSelf;
+		if (GameManager.Instance.GameState == GameState.PLAYING)
+        {
+			GameManager.Instance.SetState(GameState.PAUSE);
+        }
+        else if (GameManager.Instance.GameState == GameState.PAUSE)
+        {
+			GameManager.Instance.SetState(GameState.PLAYING);
+		}
+    }
 
-		//_player.HUD.UIPhone.gameObject.SetActive(activeState);
-		//_animator.SetBool("menuActice", activeState);
-		//menu.SetActive(activeState);
-
-		//_cinemachineInputProvider.XYAxis = activeState ? null : _xyAxis;
-
-		//Cursor.lockState = activeState ? CursorLockMode.None : CursorLockMode.Locked;
-
-		//if (activeState)
-		//{
-		//	_actions.Player.Disable();
-		//	_actions.UI.Enable();
-
-		//	_player.HUD.UIPhone.AnimateSelection();
-
-		//}
-		//else
-		//{
-		//	_actions.UI.Disable();
-		//	_actions.Player.Enable();
-		//}
-	}
-
-	#region Actions: Player
 	private void OnMove(Vector2 movement)
 	{
 		_move.x = movement.x;
@@ -152,26 +118,6 @@ public class PlayerController : MonoBehaviour
 			_animator.SetTrigger("jump");
 		}
 	}
-
-	private void OnMainHand()
-	{
-		_animator.SetTrigger("attackOne");
-	}
-
-	private void OnInteraction()
-	{
-		_player.OnInteraction();
-	}
-	#endregion
-
-	#region Actions: UI
-
-	private void OnCancel()
-	{
-		//_player.HUD.UIPhone.OnCancel();
-	}
-	#endregion
-	#endregion
 
 	private void OnEnable()
 	{
