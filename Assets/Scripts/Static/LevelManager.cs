@@ -3,14 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
 
+    public List<Transform> Chests = new List<Transform>();
+    public bool Won;
+
     [SerializeField] GameObject _uiStart;
     [SerializeField] GameObject _uiPause;
     [SerializeField] GameObject _uiEnd;
+
+    [SerializeField] TextMeshProUGUI _endText;
+
+    [SerializeField] GameObject _compass;
 
     [Header("Cinemachine")]
     [SerializeField] CinemachineInputProvider _cinemachineInputProvider;
@@ -19,6 +27,7 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] Transform _player;
     [SerializeField] List<Transform> _enemies = new List<Transform>();
+
 
     Transform[] _enemyStartPosition;
     Transform _playerStartPosition;
@@ -46,6 +55,8 @@ public class LevelManager : MonoBehaviour
 
     }
 
+    #region GameStates
+
     /// <summary>
     /// State when game is first opened.
     /// </summary>
@@ -61,7 +72,11 @@ public class LevelManager : MonoBehaviour
     public void StateStart()
     {
         _uiStart.SetActive(false);
+        _uiEnd.SetActive(false);
+
         _animator.Play("PlayerCamera");
+
+        _compass.GetComponent<Compass>().Initialize();
 
         GameManager.Instance.SetState(GameState.PLAYING);
     }
@@ -95,19 +110,23 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     public void StateEnd()
     {
-        _uiEnd.SetActive(true);
-
         _cinemachineInputProvider.XYAxis = null;
 
         Cursor.lockState = CursorLockMode.None;
 
-        if (GameManager.Instance.Won)
+        if (Won)
         {
+            _endText.text = "Won";
             //TMP Highscore: {GameManager.Instance.Highscore} + seconds;
         }
         else
         {
+            _endText.text = "You Died";
             //TMP You Died
         }
+
+        _uiEnd.SetActive(true);
     }
+
+    #endregion
 }

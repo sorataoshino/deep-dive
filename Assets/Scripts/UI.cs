@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class UI : MonoBehaviour
 {
+    [SerializeField] GameObject _interactionPanel;
+
     public void GameStart()
     {
         GameManager.Instance.SetState(GameState.START);
@@ -17,5 +19,10 @@ public class UI : MonoBehaviour
     public void GameQuit()
     {
         Application.Quit();
+    }
+
+    public void InteractionPanelSetActive(bool isActive)
+    {
+        _interactionPanel.SetActive(isActive);
     }
 }

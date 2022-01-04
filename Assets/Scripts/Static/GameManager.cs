@@ -8,9 +8,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public GameState GameState { get; private set; }
-    public int HighScore {get; set; }
-
-    public bool Won;
 
     private void Awake()
     {

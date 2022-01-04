@@ -4,35 +4,51 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerController))]
 public class Player : MonoBehaviour
 {
-	public UI UI;
+	[SerializeField] GameObject _ui;
+	[SerializeField] GameObject _compass;
 
-	PlayerController _controller;
-
-	private void Start()
-	{
-		UI = UI.GetComponent<UI>();
-		_controller = GetComponent<PlayerController>();
-	}
+	GameObject _interactableObject;
 
 	public void OnInteraction()
 	{
+		if (_interactableObject != null &&_interactableObject.tag == "Chest")
+        {
+			_compass.GetComponent<Compass>().RemoveCompassMark(_interactableObject.GetComponent<CompassMark>());
+			_interactableObject.gameObject.SetActive(false);
+			_interactableObject = null;
+			_ui.GetComponent<UI>().InteractionPanelSetActive(false);
 
+            if (LevelManager.Instance.Chests.Count == 0)
+            {
+				LevelManager.Instance.Won = true;
+				GameManager.Instance.SetState(GameState.END);
+            }
+		}
+	}
+
+	public void Die()
+    {
+		LevelManager.Instance.Won = false;
+		GameManager.Instance.SetState(GameState.END);
 	}
 
 	#region OnTrigger
 	private void OnTriggerEnter(Collider other)
 	{
-
-	}
-
-	private void OnTriggerStay(Collider other)
-	{
-
+		if (other.CompareTag("Chest"))
+		{
+			_interactableObject = other.gameObject;
+			_ui.GetComponent<UI>().InteractionPanelSetActive(true);
+		}
 	}
 
 	private void OnTriggerExit(Collider other)
 	{
-
+		if (other.CompareTag("Chest"))
+		{
+			_interactableObject = null;
+			_ui.GetComponent<UI>().InteractionPanelSetActive(false);
+		}
 	}
 	#endregion
 }
