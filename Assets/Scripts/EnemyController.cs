@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
     enum EnemyState
     { 
         SWIMMING,
+        ALERT,
         CHASING,
         RESETTING
     }
@@ -17,11 +18,11 @@ public class EnemyController : MonoBehaviour
     [SerializeField] float _moveSpeed = 1f;
 
     [SerializeField] Transform[] _waypoints;
+
     Transform _currentWaypoint;
 
     private void Start()
     {
-        _currentWaypoint = _waypoints[0];
         _state = EnemyState.SWIMMING;
     }
 
@@ -31,6 +32,9 @@ public class EnemyController : MonoBehaviour
         {
             case EnemyState.SWIMMING:
                 StateSwimming();
+                break;
+            case EnemyState.ALERT:
+                StateAlert();
                 break;
             case EnemyState.CHASING:
                 StateChasing();
@@ -45,7 +49,12 @@ public class EnemyController : MonoBehaviour
 
     void StateSwimming()
     {
-       transform.position = Vector3.MoveTowards(transform.position, _currentWaypoint.position, _moveSpeed) * Time.deltaTime;
+       
+    }
+
+    void StateAlert()
+    {
+
     }
 
     void StateChasing()

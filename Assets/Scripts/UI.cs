@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
-    [SerializeField] GameObject _interactionPanel;
-
     public void GameStart()
     {
-        GameManager.Instance.SetState(GameState.START);
+        SceneManager.LoadScene("Level_0");
     }
 
     public void GameResume()
@@ -21,8 +18,12 @@ public class UI : MonoBehaviour
         Application.Quit();
     }
 
-    public void InteractionPanelSetActive(bool isActive)
+    /// <summary>
+    /// If panel is active hide it, else show it
+    /// </summary>
+    /// <param name="ui"></param>
+    public void SetActivePanel(GameObject ui)
     {
-        _interactionPanel.SetActive(isActive);
+        ui.SetActive(!ui.activeSelf);
     }
 }

@@ -1,13 +1,24 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
-public enum GameState { INTRO, START, PLAYING, PAUSE, END}
+public enum GameState {PLAYING, PAUSE}
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+
     public GameState GameState { get; private set; }
+
+    [SerializeField] CinemachineInputProvider _cinemachineInputProvider;
+    InputActionReference _xyAxis;
+
+    [SerializeField] GameObject _uiSettings;
+    [SerializeField] GameObject _compass;
+
+    [SerializeField] List<GameObject> _chests = new List<GameObject>();
 
     private void Awake()
     {
@@ -21,26 +32,46 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        _xyAxis = _cinemachineInputProvider.XYAxis;
+
+        _compass.GetComponent<Compass>().Initialize();
+
+        SetState(GameState.PLAYING);
+    }
+
+    public void ChestOpened(GameObject chest)
+    {
+        _chests.Remove(chest);
+
+        if (_chests.Count == 0)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            SceneManager.LoadScene("EndScreen");
+        }
+    }
+
     public void SetState(GameState state)
     {
         GameState = state;
 
         switch (state)
         {
-            case GameState.INTRO:
-                LevelManager.Instance.StateIntro();
-                break;
-            case GameState.START:
-                LevelManager.Instance.StateStart();
-                break;
             case GameState.PLAYING:
-                LevelManager.Instance.StatePlaying();
+
+                _uiSettings.SetActive(false);
+                _cinemachineInputProvider.XYAxis = _xyAxis;
+                Cursor.lockState = CursorLockMode.Locked;
+
                 break;
             case GameState.PAUSE:
-                LevelManager.Instance.StatePause();
-                break;
-            case GameState.END:
-                LevelManager.Instance.StateEnd();
+
+                _uiSettings.SetActive(true);
+
+                _cinemachineInputProvider.XYAxis = null;
+                Cursor.lockState = CursorLockMode.None;
+
                 break;
             default:
                 break;

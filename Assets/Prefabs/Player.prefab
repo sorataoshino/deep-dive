@@ -789,6 +789,7 @@ GameObject:
   - component: {fileID: 2891365442296269258}
   - component: {fileID: 2891365442296269259}
   - component: {fileID: 2891365442296269269}
+  - component: {fileID: 1026246841}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -863,8 +864,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185094c31e6275d4da9bec6ac8af85f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: {fileID: 0}
-  _cinemachineInputProvider: {fileID: 0}
   _moveSpeed: 6
   _runSpeed: 2
   _jumpHeight: 3
@@ -874,6 +873,20 @@ MonoBehaviour:
   _groundMask:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &1026246841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2657502412397824177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb4954ecb2ff444aac1ab709dfabdc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ui: {fileID: 0}
+  _compass: {fileID: 0}
 --- !u!1 &2760248579867171989
 GameObject:
   m_ObjectHideFlags: 0

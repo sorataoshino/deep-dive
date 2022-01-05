@@ -4,32 +4,12 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerController))]
 public class Player : MonoBehaviour
 {
-	[SerializeField] GameObject _ui;
-	[SerializeField] GameObject _compass;
-
+	[SerializeField] GameObject _interactionPanel;
 	GameObject _interactableObject;
 
 	public void OnInteraction()
 	{
-		if (_interactableObject != null &&_interactableObject.tag == "Chest")
-        {
-			_compass.GetComponent<Compass>().RemoveCompassMark(_interactableObject.GetComponent<CompassMark>());
-			_interactableObject.gameObject.SetActive(false);
-			_interactableObject = null;
-			_ui.GetComponent<UI>().InteractionPanelSetActive(false);
-
-            if (LevelManager.Instance.Chests.Count == 0)
-            {
-				LevelManager.Instance.Won = true;
-				GameManager.Instance.SetState(GameState.END);
-            }
-		}
-	}
-
-	public void Die()
-    {
-		LevelManager.Instance.Won = false;
-		GameManager.Instance.SetState(GameState.END);
+		GameManager.Instance.ChestOpened(_interactableObject);
 	}
 
 	#region OnTrigger
@@ -38,7 +18,7 @@ public class Player : MonoBehaviour
 		if (other.CompareTag("Chest"))
 		{
 			_interactableObject = other.gameObject;
-			_ui.GetComponent<UI>().InteractionPanelSetActive(true);
+			_interactionPanel.SetActive(true);
 		}
 	}
 
@@ -47,7 +27,7 @@ public class Player : MonoBehaviour
 		if (other.CompareTag("Chest"))
 		{
 			_interactableObject = null;
-			_ui.GetComponent<UI>().InteractionPanelSetActive(false);
+			_interactionPanel.SetActive(false);
 		}
 	}
 	#endregion
