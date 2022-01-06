@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] float _moveSpeed = 6f;
 
 	[Tooltip("Adds to Move Speed")]
-	[SerializeField] float _runSpeed = 2f;
+	[SerializeField] float _crouchSpeed = 2f;
 
 	[SerializeField] float _jumpHeight = 3f;
 	[SerializeField] float _turnSmoothTime = 0.1f;
@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour
 		}
 
 		_animator.SetFloat("moveSpeed", _controller.velocity.magnitude);
+		_animator.SetBool("isGrounded", _isGrounded);
 
 		_controller.Move(new Vector3(0.0f, _move.y, 0.0f) * Time.deltaTime);
 		#endregion
@@ -106,7 +107,7 @@ public class PlayerController : MonoBehaviour
 
 	private void OnCrouch(bool isCrouching)
 	{
-		_moveSpeed -= isCrouching ? _runSpeed : -_runSpeed;
+		_moveSpeed -= isCrouching ? _crouchSpeed : -_crouchSpeed;
 		_animator.SetBool("isCrouching", isCrouching);
 	}
 

@@ -25,6 +25,7 @@ public class MenuAudio : MonoBehaviour
         yield return new WaitForSeconds(_introAudio.length - _overlapSeconds);
 
         _audio.clip = _backgroundMusic;
+        _audio.loop = true;
         _audio.Play();
     }
 }

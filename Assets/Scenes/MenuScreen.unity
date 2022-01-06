@@ -422,7 +422,6 @@ MonoBehaviour:
   - {fileID: 787695259}
   _audioVolumeSlider: {fileID: 4331412819862932018}
   _mouseSensivitySlider: {fileID: 4331412819862932019}
-  cam: {fileID: 4444502375350847603, guid: ccb03983acfa4d74e9500f77df043ceb, type: 3}
 --- !u!1001 &388426027
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -739,8 +738,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a0e9995a86dda04d84e62d26e8e62c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _introAudio: {fileID: 8300000, guid: 272e5e7e95b2fa74ab8aac60997c97ba, type: 3}
-  _backgroundMusic: {fileID: 8300000, guid: fe5fa6671a54b22408e6252466ae0d5f, type: 3}
+  _introAudio: {fileID: 8300000, guid: d53776a35a1f95a4cab09042249ba8b0, type: 3}
+  _backgroundMusic: {fileID: 8300000, guid: 044d414df760b514a84d7bddc720f54a, type: 3}
   _overlapSeconds: 1
 --- !u!82 &787695259
 AudioSource:

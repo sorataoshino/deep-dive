@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 2c62578b8ecc3274781854b29714f8c2
+guid: 43a185edf7ddd4e4b9c975867dc86222
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Brett_Broken_01
+    second: {fileID: 2100000, guid: 63b61e3e8f235a44c87106792fe4a048, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -34,9 +39,9 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 20
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importVisibility: 1
@@ -85,7 +90,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 20
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
