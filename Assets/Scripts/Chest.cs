@@ -6,6 +6,6 @@ public class Chest : MonoBehaviour
 {
     public void Open()
     {
-
+        GetComponent<Animator>().SetTrigger("open");
     }
 }

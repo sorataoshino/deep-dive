@@ -9,7 +9,12 @@ public class Player : MonoBehaviour
 
 	public void OnInteraction()
 	{
-		GameManager.Instance.ChestOpened(_interactableObject);
+        if (_interactableObject != null)
+        {
+			_interactableObject.GetComponent<Chest>().Open();
+			GameManager.Instance.ChestOpened(_interactableObject);
+			_interactableObject = null;
+        }
 	}
 
 	#region OnTrigger

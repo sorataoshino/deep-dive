@@ -12,7 +12,7 @@ public class Compass : MonoBehaviour
 
     public float MarkMaxDistance = 150;
 
-    List<CompassMark> _marks = new List<CompassMark>();
+    Dictionary<CompassMark, GameObject> _marks = new Dictionary<CompassMark, GameObject>();
 
     float compassUnit;
 
@@ -30,11 +30,11 @@ public class Compass : MonoBehaviour
 
     private void Update()
     {
-        foreach (CompassMark mark in _marks)
+        foreach (KeyValuePair<CompassMark, GameObject> mark in _marks)
         {
-            mark.Image.rectTransform.anchoredPosition = GetPositionOnCompass(mark);
+            mark.Key.Image.rectTransform.anchoredPosition = GetPositionOnCompass(mark.Key);
 
-            float dst = Vector2.Distance(new Vector2(_player.transform.position.x, _player.transform.position.z), mark.position);
+            float dst = Vector2.Distance(new Vector2(_player.transform.position.x, _player.transform.position.z), mark.Key.position);
             float scale = 0f;
 
             if (dst < MarkMaxDistance)
@@ -42,17 +42,17 @@ public class Compass : MonoBehaviour
                 scale = 1f - (dst / MarkMaxDistance);
             }
 
-            mark.Image.rectTransform.localScale = Vector3.one * scale;
+            mark.Key.Image.rectTransform.localScale = Vector3.one * scale;
         }    
     }
 
     void AddCompassMark(CompassMark mark)
     {
-        GameObject newMark = Instantiate(_iconPrefab, _compassImage.transform);
-        mark.Image = newMark.GetComponent<Image>();
+        GameObject uiMark = Instantiate(_iconPrefab, _compassImage.transform);
+        mark.Image = uiMark.GetComponent<Image>();
         mark.Image.sprite = mark.Icon;
 
-        _marks.Add(mark);
+        _marks.Add(mark, uiMark);
     }
 
     Vector2 GetPositionOnCompass(CompassMark mark)
@@ -65,8 +65,14 @@ public class Compass : MonoBehaviour
         return new Vector2(compassUnit * angle, 0f);
     }
 
-    public void RemoveCompassMark(CompassMark mark)
+    public void RemoveCompassMark(GameObject mark)
     {
-        _marks.Remove(mark);
+        GameObject uiMark;
+        bool hasValue =_marks.TryGetValue(mark.GetComponent<CompassMark>(), out uiMark);
+
+        if (hasValue)
+        {
+            uiMark.SetActive(false);
+        }
     }
 }

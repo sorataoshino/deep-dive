@@ -59,5 +59,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Korallen_02_Blue
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 58fea392542972b42bfe27df75a8325b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58fea392542972b42bfe27df75a8325b, type: 3}

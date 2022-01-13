@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     public void ChestOpened(GameObject chest)
     {
+        _compass.GetComponent<Compass>().RemoveCompassMark(chest);
         _chests.Remove(chest);
 
         if (_chests.Count == 0)
@@ -50,6 +51,12 @@ public class GameManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             SceneManager.LoadScene("EndScreen");
         }
+    }
+
+    public void GameOver()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        SceneManager.LoadScene("EndScreen");
     }
 
     public void SetState(GameState state)

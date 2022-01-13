@@ -28,6 +28,9 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] float _groundDistance = 0.4f;
 	[SerializeField] LayerMask _groundMask;
 
+	[SerializeField] float _gravityMultiplier = 2f;
+
+
 	bool _isGrounded;
 
 	private void Awake()
@@ -63,7 +66,7 @@ public class PlayerController : MonoBehaviour
 		{
 			_move.y = -2f;
 		}
-		_move.y += Physics.gravity.y * Time.deltaTime;
+		_move.y += (Physics.gravity.y * _gravityMultiplier) * Time.deltaTime;
 		#endregion
 
 		#region Movement

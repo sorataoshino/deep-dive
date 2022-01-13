@@ -23,6 +23,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] float _rotationSpeed = 1f;
 
     [SerializeField] float _secondsUntilChase = 1f;
+
+    [SerializeField] float _gameOverDistance = 1f;
     float _secondsPassed;
 
     Transform _target;
@@ -73,14 +75,17 @@ public class EnemyController : MonoBehaviour
         }
 
         _secondsPassed += Time.deltaTime;
-
-        Debug.Log(_secondsPassed);
     }
 
     void StateChasing()
     {
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_target.position - transform.position), _alertRotationSpeed * Time.deltaTime);
         transform.position += transform.forward * _chaseSpeed * Time.deltaTime;
+
+        if (Vector3.Distance(transform.position, _target.position) < _gameOverDistance)
+        {
+            GameManager.Instance.GameOver();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
