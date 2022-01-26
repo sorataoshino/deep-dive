@@ -26,7 +26,7 @@
             {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "Scattering.UsePivotForPlacement",
-                "value": "{\"m_Value\":true}"
+                "value": "{\"m_Value\":false}"
             },
             {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
@@ -91,12 +91,12 @@
             {
                 "type": "UnityEditor.Polybrush.PrefabLoadout, Unity.Polybrush.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ScatteringEditor.userLoadout",
-                "value": "{\"m_Value\":{\"infos\":[{\"palette\":{\"fileID\":11400000,\"guid\":\"67ccd3c8340c02c48bd242e43d6767fa\",\"type\":2},\"prefab\":{\"fileID\":4761511553729056866,\"guid\":\"60e9e0aa321253743ada03e356fb32da\",\"type\":3}},{\"palette\":{\"fileID\":11400000,\"guid\":\"67ccd3c8340c02c48bd242e43d6767fa\",\"type\":2},\"prefab\":{\"fileID\":8699455404941833670,\"guid\":\"70295fdfafb0be74abca0f1e34e84888\",\"type\":3}},{\"palette\":{\"fileID\":11400000,\"guid\":\"67ccd3c8340c02c48bd242e43d6767fa\",\"type\":2},\"prefab\":{\"fileID\":2437490134819485410,\"guid\":\"e56a51e2ea238c645b7f4fd3e43da783\",\"type\":3}}]}}"
+                "value": "{\"m_Value\":{\"infos\":[{\"palette\":{\"fileID\":11400000,\"guid\":\"0ecb6d92a1b40ca4c90d12642934e776\",\"type\":2},\"prefab\":{\"fileID\":6162321788637441332,\"guid\":\"60e9e0aa321253743ada03e356fb32da\",\"type\":3}},{\"palette\":{\"fileID\":11400000,\"guid\":\"0ecb6d92a1b40ca4c90d12642934e776\",\"type\":2},\"prefab\":{\"fileID\":4062006311872920669,\"guid\":\"8fe0addc08e318946aa672ec77e2c68f\",\"type\":3}},{\"palette\":{\"fileID\":11400000,\"guid\":\"0ecb6d92a1b40ca4c90d12642934e776\",\"type\":2},\"prefab\":{\"fileID\":2121778919984688099,\"guid\":\"e56a51e2ea238c645b7f4fd3e43da783\",\"type\":3}},{\"palette\":{\"fileID\":11400000,\"guid\":\"0ecb6d92a1b40ca4c90d12642934e776\",\"type\":2},\"prefab\":{\"fileID\":951072861045952900,\"guid\":\"137847833ead5e7478bf60a3e2145d0d\",\"type\":3}}]}}"
             },
             {
                 "type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "ScatteringEditor.PreviewThumSize",
-                "value": "{\"m_Value\":65}"
+                "value": "{\"m_Value\":71}"
             },
             {
                 "type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",

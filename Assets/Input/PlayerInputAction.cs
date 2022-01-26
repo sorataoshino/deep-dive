@@ -71,7 +71,7 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""060cb19f-9207-4a06-8d7f-42d4bc744b38"",
-                    ""path"": ""<Pointer>/delta"",
+                    ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",

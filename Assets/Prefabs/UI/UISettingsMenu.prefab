@@ -401,15 +401,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8726290837429251051, guid: 59ea55c3545de874aa49dce5f5e4000b, type: 3}
       propertyPath: m_Value
-      value: 200
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8726290837429251051, guid: 59ea55c3545de874aa49dce5f5e4000b, type: 3}
       propertyPath: m_MaxValue
-      value: 500
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 8726290837429251051, guid: 59ea55c3545de874aa49dce5f5e4000b, type: 3}
       propertyPath: m_MinValue
-      value: 50
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 8726290837429251051, guid: 59ea55c3545de874aa49dce5f5e4000b, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
