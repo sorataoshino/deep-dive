@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
 
 	[SerializeField] float _gravityMultiplier = 2f;
 
-
 	bool _isGrounded;
 
 	private void Awake()
@@ -120,6 +119,8 @@ public class PlayerController : MonoBehaviour
 		{
 			_move.y = Mathf.Sqrt(_jumpHeight * -2 * Physics.gravity.y);
 			_animator.SetTrigger("jump");
+			GetComponent<PlayerAudio>().Jump();
+
 		}
 	}
 

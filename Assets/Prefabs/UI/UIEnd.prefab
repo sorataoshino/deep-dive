@@ -39,6 +39,22 @@ PrefabInstance:
       propertyPath: m_text
       value: Text
       objectReference: {fileID: 0}
+    - target: {fileID: 4078831978238515019, guid: ef69bccab0e474a47989a51a95448b23, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4078831978238515019, guid: ef69bccab0e474a47989a51a95448b23, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4078831978238515019, guid: ef69bccab0e474a47989a51a95448b23, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4078831978238515019, guid: ef69bccab0e474a47989a51a95448b23, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4772544191181111394, guid: ef69bccab0e474a47989a51a95448b23, type: 3}
       propertyPath: m_text
       value: Restart

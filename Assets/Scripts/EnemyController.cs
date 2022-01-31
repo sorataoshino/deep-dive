@@ -24,11 +24,17 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] float _secondsUntilChase = 1f;
 
+    [SerializeField] float _nextCheckPointDistance = 3f;
+    [SerializeField] float _playBiteSoundDistance = 3f;
     [SerializeField] float _gameOverDistance = 1f;
+
+    [SerializeField] AudioClip[] _bite;
+
     float _secondsPassed;
 
     Transform _target;
     int _currentWaypoint;
+    bool biteSoundPlayed;
 
     private void Start()
     {
@@ -55,7 +61,7 @@ public class EnemyController : MonoBehaviour
 
     void StateSwimming()
     {
-        if (Vector3.Distance(Waypoints[_currentWaypoint].position, transform.position) < 1)
+        if (Vector3.Distance(Waypoints[_currentWaypoint].position, transform.position) < _nextCheckPointDistance)
         {
             _currentWaypoint = (_currentWaypoint + 1) % Waypoints.Length;
         }
@@ -82,6 +88,12 @@ public class EnemyController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_target.position - transform.position), _alertRotationSpeed * Time.deltaTime);
         transform.position += transform.forward * _chaseSpeed * Time.deltaTime;
 
+        if (Vector3.Distance(transform.position, _target.position) < _playBiteSoundDistance && biteSoundPlayed == false)
+        {
+            biteSoundPlayed = true;
+            GetComponent<AudioSource>().PlayOneShot(_bite[Random.Range(0, _bite.Length)]);
+        }
+
         if (Vector3.Distance(transform.position, _target.position) < _gameOverDistance)
         {
             GameManager.Instance.GameOver();
@@ -94,6 +106,7 @@ public class EnemyController : MonoBehaviour
         {
             _target = other.transform;
             _state = EnemyState.ALERT;
+            other.GetComponent<PlayerAudio>().Heartbeat(true);
         }
     }
 
@@ -103,6 +116,7 @@ public class EnemyController : MonoBehaviour
         {
             _state = EnemyState.SWIMMING;
             _secondsPassed = 0;
+            other.GetComponent<PlayerAudio>().Heartbeat(false);
         }
     }
 

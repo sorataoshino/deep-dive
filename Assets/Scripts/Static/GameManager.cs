@@ -35,10 +35,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _xyAxis = _cinemachineInputProvider.XYAxis;
-
-        _compass.GetComponent<Compass>().Initialize();
-
         SetState(GameState.PLAYING);
+        _compass.GetComponent<Compass>().Initialize();
     }
 
     public void ChestOpened(GameObject chest)
@@ -49,6 +47,7 @@ public class GameManager : MonoBehaviour
         if (_chests.Count == 0)
         {
             Cursor.lockState = CursorLockMode.None;
+            EndScreenInfo.won = true;
             SceneManager.LoadScene("EndScreen");
         }
     }
@@ -56,6 +55,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         Cursor.lockState = CursorLockMode.None;
+        EndScreenInfo.won = false;
         SceneManager.LoadScene("EndScreen");
     }
 

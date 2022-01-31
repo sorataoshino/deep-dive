@@ -35,5 +35,13 @@ public class Player : MonoBehaviour
 			_interactionPanel.SetActive(false);
 		}
 	}
-	#endregion
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+		if (hit.transform.CompareTag("Box"))
+		{
+			hit.transform.GetComponent<Rigidbody>().AddForce(transform.position, ForceMode.Force);
+		}
+	}
+    #endregion
 }

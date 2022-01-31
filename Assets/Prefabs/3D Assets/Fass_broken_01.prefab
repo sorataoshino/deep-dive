@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 340916781884057922}
   - component: {fileID: 2548994818050874760}
   - component: {fileID: 8107285924833752317}
+  - component: {fileID: 1722914952}
   m_Layer: 6
   m_Name: Fass_broken_01
-  m_TagString: Untagged
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,3 +98,19 @@ CapsuleCollider:
   m_Height: 1.61
   m_Direction: 1
   m_Center: {x: -0.00000002980232, y: 0, z: 0}
+--- !u!54 &1722914952
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4062006311872920669}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
-    [SerializeField] List<AudioSource> _audioSources = new List<AudioSource>();
     [SerializeField] Slider _audioVolumeSlider;
     [SerializeField] Slider _mouseSensivitySlider;
 
@@ -17,10 +16,7 @@ public class Settings : MonoBehaviour
         {
             _audioVolumeSlider.value = data.AudioVolume;
 
-            foreach (AudioSource audio in _audioSources)
-            {
-                audio.volume = _audioVolumeSlider.value;
-            }
+            AudioListener.volume = _audioVolumeSlider.value;
 
             _mouseSensivitySlider.value = data.MouseSensivity;
         }
@@ -28,10 +24,7 @@ public class Settings : MonoBehaviour
 
     public void ChangeAudioVolume()
     {
-        foreach (AudioSource audio in _audioSources)
-        {
-            audio.volume = _audioVolumeSlider.value;
-        }
+        AudioListener.volume = _audioVolumeSlider.value;
     }
 
     public void SaveSettings()
