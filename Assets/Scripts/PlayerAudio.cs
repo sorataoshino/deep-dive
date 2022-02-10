@@ -71,6 +71,7 @@ public class PlayerAudio : MonoBehaviour
                 _movementAudioSource.PlayOneShot(_walkGrassLeft);
                 break;
             default:
+                _movementAudioSource.PlayOneShot(_walkWoodLeft);
                 break;
         }
     }
@@ -91,6 +92,7 @@ public class PlayerAudio : MonoBehaviour
                 _movementAudioSource.PlayOneShot(_walkGrassRight);
                 break;
             default:
+                _movementAudioSource.PlayOneShot(_walkWoodRight);
                 break;
         }
     }
@@ -110,6 +112,7 @@ public class PlayerAudio : MonoBehaviour
                 _movementAudioSource.PlayOneShot(_crouchGrassLeft);
                 break;
             default:
+                _movementAudioSource.PlayOneShot(_crouchWoodLeft);
                 break;
         }
     }
@@ -130,6 +133,7 @@ public class PlayerAudio : MonoBehaviour
                 _movementAudioSource.PlayOneShot(_crouchGrassRight);
                 break;
             default:
+                _movementAudioSource.PlayOneShot(_crouchWoodRight);
                 break;
         }
     }
@@ -150,6 +154,7 @@ public class PlayerAudio : MonoBehaviour
                 _movementAudioSource.PlayOneShot(_jumpGrass);
                 break;
             default:
+                _movementAudioSource.PlayOneShot(_jumpWood);
                 break;
         }
     }

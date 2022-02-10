@@ -179,6 +179,77 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""e7d470a7-5679-43ff-ac93-cb67870e7a27"",
+            ""actions"": [
+                {
+                    ""name"": ""ArrowKeys"",
+                    ""type"": ""Value"",
+                    ""id"": ""aa6c642b-6b2b-43ca-9723-2e8089136db1"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""ArrowKeys"",
+                    ""id"": ""b3789fc0-faf9-47c3-a177-a4ff33adaed2"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ArrowKeys"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""39244e8d-1724-4d98-9f7e-3c9222c12351"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""ArrowKeys"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""e283ed21-1207-4301-b7ed-e05fc5ba657d"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""ArrowKeys"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""6c2ca0a8-bfd6-43f7-80d8-53c61deb09d5"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""ArrowKeys"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""5f73087c-65a6-4bf8-8761-b31af21c30f0"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""ArrowKeys"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -208,6 +279,9 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_ArrowKeys = m_UI.FindAction("ArrowKeys", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -326,6 +400,39 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_ArrowKeys;
+    public struct UIActions
+    {
+        private @PlayerInputAction m_Wrapper;
+        public UIActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ArrowKeys => m_Wrapper.m_UI_ArrowKeys;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void SetCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterface != null)
+            {
+                @ArrowKeys.started -= m_Wrapper.m_UIActionsCallbackInterface.OnArrowKeys;
+                @ArrowKeys.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnArrowKeys;
+                @ArrowKeys.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnArrowKeys;
+            }
+            m_Wrapper.m_UIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @ArrowKeys.started += instance.OnArrowKeys;
+                @ArrowKeys.performed += instance.OnArrowKeys;
+                @ArrowKeys.canceled += instance.OnArrowKeys;
+            }
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -343,5 +450,9 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnArrowKeys(InputAction.CallbackContext context);
     }
 }
