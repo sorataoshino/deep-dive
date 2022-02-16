@@ -2521,13 +2521,14 @@ MonoBehaviour:
   _moveSpeed: 6
   _crouchSpeed: 2
   _jumpHeight: 3
+  _jumpTime: 0.5
   _turnSmoothTime: 0.1
   _groundCheck: {fileID: 635664323453302043}
-  _groundDistance: 0.3
+  _groundDistance: 0.25
   _groundMask:
     serializedVersion: 2
     m_Bits: 64
-  _gravityMultiplier: 2
+  _gravityMultiplier: 1
 --- !u!82 &2286899847386109533
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2636,7 +2637,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.35
   m_Pitch: 1
   Loop: 0
   Mute: 0

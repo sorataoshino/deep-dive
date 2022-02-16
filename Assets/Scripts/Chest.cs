@@ -9,5 +9,12 @@ public class Chest : MonoBehaviour
     {
         GetComponent<Animator>().SetTrigger("open");
         GetComponent<AudioSource>().Play();
+        StartCoroutine(RemoveChest());
+    }
+
+    IEnumerator RemoveChest()
+    {
+        yield return new WaitForSeconds(2);
+        transform.localScale = new Vector3(0, 0, 0);
     }
 }

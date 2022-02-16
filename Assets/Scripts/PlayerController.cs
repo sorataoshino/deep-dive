@@ -12,11 +12,11 @@ public class PlayerController : MonoBehaviour
 
 	[Header("Controller")]
 	[SerializeField] float _moveSpeed = 6f;
-
 	[Tooltip("Adds to Move Speed")]
 	[SerializeField] float _crouchSpeed = 2f;
 
 	[SerializeField] float _jumpHeight = 3f;
+	[SerializeField] float _jumpTime = 1f;
 	[SerializeField] float _turnSmoothTime = 0.1f;
 
 	float _turnSmoothVelocity;
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
 		_animator.SetFloat("moveSpeed", _controller.velocity.magnitude);
 		_animator.SetBool("isGrounded", _isGrounded);
 
-		_controller.Move(new Vector3(0.0f, _move.y, 0.0f) * Time.deltaTime);
+		_controller.Move(new Vector3(0.0f, _move.y, 0.0f) * (_jumpTime  * Time.deltaTime));
 		#endregion
 	}
 
@@ -132,5 +132,12 @@ public class PlayerController : MonoBehaviour
 	private void OnDisable()
 	{
 		_actions.Player.Disable();
+	}
+
+    private void OnDrawGizmos()
+    {
+		Gizmos.color = Color.blue;
+		Gizmos.DrawSphere(_groundCheck.position, _groundDistance);
+
 	}
 }
